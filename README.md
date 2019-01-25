@@ -16,7 +16,7 @@ Processing and visualizing data from the Bangladesh Bureau of Statistics' "2011 
 
 http://203.112.218.65:8008/PageWebMenuContent.aspx?MenuKey=246
 
-Does not currently incorporate the upazila-level data. Only incorporates district-level data for selected variables.
+Incomplete. Does not currently incorporate the upazila-level data. Only incorporates district-level data for selected variables.
 
 ### dredging_plan.csv
 
