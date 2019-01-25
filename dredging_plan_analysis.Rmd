@@ -1,0 +1,264 @@
+---
+title: "Dredging plan analysis"
+author: "Tristan Kindig"
+date: "January 24, 2019"
+output:
+  html_notebook:
+    toc: yes
+---
+
+```{r include = FALSE}
+# import libraries
+library(ggrepel)
+library(kableExtra)
+library(purrr)
+library(sf)
+library(tidyverse)
+
+# load CSV data
+dredging_plan_df <- read_csv("./data/csvs/dredging_plan.csv")
+district_statistics_df <- read_csv("./data/csvs/district_statistics.csv")
+
+# load shapefile data
+bgd_nation_sf <- st_read("./data/shapefiles/bgd_nation/bgd_nation.shp")
+bgd_divisions_sf <- st_read("./data/shapefiles/bgd_divisions/bgd_divisions.shp")
+bgd_districts_sf <- st_read("./data/shapefiles/bgd_districts/bgd_districts.shp")
+bgd_hydrology_sf <- st_read("./data/shapefiles/bgd_hydrology/bgd_hydrology.shp")
+bgd_iwt_routes_sf <- st_read("./data/shapefiles/bgd_iwt_routes/bgd_iwt_routes.shp")
+bgd_ports_sf <- st_read("./data/shapefiles/bgd_ports/bgd_ports.shp")
+
+# add population density, riverine area percentage, agricultural output, and waterways/sq_km to district_statistics_df
+district_statistics_df <- district_statistics_df %>%
+  mutate(
+    density_pop_per_sq_km = round(population / total_area_sq_km),
+    midpoint_temperature = round(
+      (max_temp_c + min_temp_c) / 2,
+      1
+    ),
+    riverine_area_percentage = round(riverine_area_sq_km / total_area_sq_km * 100),
+    agricultural_product_metric_ton = round(
+      (rice_metric_ton + wheat_metric_ton + sugarcane_metric_ton + potato_metric_ton),
+      1
+    ),
+    monsoon_waterway_km_per_sq_km = round(waterway_monsoon_season_km / total_area_sq_km)
+  ) %>%
+  arrange(district)
+
+# remove unnecessary attributes from bgd_districts_sf
+undesired_columns <- c("ADM2_PCODE", "ADM2_REF", "ADM2ALT1EN", "ADM2ALT2EN", "ADM1_EN", "ADM1_PCODE", "ADM0_EN", "ADM0_PCODE", "date", "validOn", "ValidTo")
+bgd_districts_sf <- bgd_districts_sf %>%
+  modify_at(undesired_columns, ~NULL)
+
+# convert factor attributes to character attributes
+bgd_divisions_sf$ADM1_EN <- as.character(bgd_divisions_sf$ADM1_EN)
+bgd_districts_sf$ADM2_EN <- as.character(bgd_districts_sf$ADM2_EN)
+bgd_ports_sf$River_Port <- as.character(bgd_ports_sf$River_Port)
+
+# add population density, midpoint temperature, riverine area percentage, agricultural output, and waterways/sq_km to district_statistics_df
+district_statistics_df <- district_statistics_df %>%
+  mutate(
+    density_pop_per_sq_km = round(population / total_area_sq_km),
+    midpoint_temperature = round(
+      (max_temp_c + min_temp_c) / 2,
+      1
+    ),
+    riverine_area_percentage = round(riverine_area_sq_km / total_area_sq_km * 100),
+    agricultural_product_metric_ton = round(
+      (rice_metric_ton + wheat_metric_ton + sugarcane_metric_ton + potato_metric_ton),
+      2
+    ),
+    monsoon_waterway_km_per_sq_km = round(waterway_monsoon_season_km / total_area_sq_km)
+  ) %>%
+  arrange(district)
+
+# create division_statistics_df
+div_stats_part_1 <- district_statistics_df %>%
+  group_by(division) %>%
+  summarize_at(
+    c("total_area_sq_km", "riverine_area_sq_km", "population", "rainfall_meters", "rice_metric_ton", "wheat_metric_ton", "sugarcane_metric_ton", "potato_metric_ton", "road_km", "railway_km", "waterway_monsoon_season_km", "waterway_year_round_km", "railway_station", "steamer_station", "bus_station"),
+    sum,
+    na.rm = TRUE
+  )
+div_stats_part_2 <- district_statistics_df %>%
+  group_by(division) %>%
+  summarize_at(
+    c("max_temp_c", "min_temp_c", "midpoint_temperature"),
+    median,
+    na.rm = TRUE
+  )
+division_statistics_df <- left_join(div_stats_part_1, div_stats_part_2, by = "division")
+
+# add population density, riverine area percentage, total agricultural output, and waterways/sq_km to division_statistics_df
+division_statistics_df <- division_statistics_df %>%
+  mutate(
+    density_pop_per_sq_km = round(population / total_area_sq_km),
+    riverine_area_percentage = round(riverine_area_sq_km / total_area_sq_km * 100),
+    agricultural_product_metric_ton = round(
+      (rice_metric_ton + wheat_metric_ton + sugarcane_metric_ton + potato_metric_ton),
+      2
+    ),
+    monsoon_waterway_km_per_sq_km = round(waterway_monsoon_season_km / total_area_sq_km)
+  ) %>%
+  arrange(division)
+
+# join df to sf
+bgd_divisions_sf <- left_join(bgd_divisions_sf, division_statistics_df, by=c("ADM1_EN" = "division"))
+bgd_districts_sf <- left_join(bgd_districts_sf, district_statistics_df, by=c("ADM2_EN" = "district"))
+
+# rename Pangaon Port to Pangaon
+bgd_ports_sf <- bgd_ports_sf %>% 
+    mutate(River_Port = replace(River_Port, River_Port == "Pangaon Port", "Pangaon"))
+```
+
+### Density plot of Phase 1 dredging project costs (outliers removed)
+```{r echo = FALSE}
+projects_under_750 <- dredging_plan_df %>%
+  filter(cost_mil_usd < 750)
+
+ggplot(projects_under_750) +
+  geom_density(
+    aes(x = cost_mil_usd),
+    fill = "red"
+  ) +
+  geom_vline(
+    xintercept = median(projects_under_750$cost_mil_usd),
+    color = "black"
+  ) +
+  annotate(
+    "text",
+    x = median(projects_under_750$cost_mil_usd),
+    y = 0.003,
+    angle = 90,
+    vjust = 1.5,
+    hjust = 0.9,
+    color = "black",
+    size = 4,
+    label = paste("median = ", round(median(projects_under_750$cost_mil_usd)))
+  ) +
+  labs(
+    subtitle = "n = 219; 4 outliers removed",
+    x = "Cost (million USD)",
+    y = "Density"
+  ) +
+  xlim(0, 750)
+```
+
+### Density plot of Phase 1 dredging project costs by agency (outliers removed)
+```{r echo = FALSE}
+ggplot(projects_under_750) +
+  geom_density(
+    aes(x = cost_mil_usd, fill = agency, color = agency),
+    alpha = 0.3
+  ) +
+  labs(
+    x = "Cost (million USD)",
+    y = "Density"
+  )
+```
+
+### Histogram of Phase 1 dredging project costs, stacked by agency
+```{r echo = FALSE}
+ggplot(
+  projects_under_750,
+  aes(x = cost_mil_usd)
+) + 
+stat_bin(
+  aes(fill = agency),
+  breaks = seq(0, 750, 75)
+) +  
+stat_bin(
+  breaks = seq(0, 750, 75),
+  geom="text",
+  aes(label=..count..),
+  vjust=-0.5
+) +
+scale_x_continuous(breaks = seq(0, 750, 75)) +
+ylim(c(0, 150)) +
+labs(
+  subtitle = "10 bins, each 75 wide; 4 outliers removed; n = 219",
+  x = "Cost (million USD)",
+  y = "Count",
+  fill = "Agency"
+)
+```
+
+### Histogram of Phase 1 dredging project costs, stacked by activity
+```{r echo = FALSE}
+ggplot(
+  projects_under_750,
+  aes(x = cost_mil_usd)
+) + 
+stat_bin(
+  aes(fill = activity),
+  breaks = seq(0, 750, 75)
+) +  
+stat_bin(
+  breaks = seq(0, 750, 75),
+  geom="text",
+  aes(label=..count..),
+  vjust=-0.5
+) +
+scale_x_continuous(breaks = seq(0, 750, 75)) +
+ylim(c(0, 150)) +
+labs(
+  subtitle = "10 bins, each 75 wide; 4 outliers removed; n = 219",
+  x = "Cost (million USD)",
+  y = "Count",
+  fill = "Activity"
+)
+```
+
+### Overall Phase 1 dredging project statistics
+```{r results = "asis", echo = FALSE}
+activity_stats <- dredging_plan_df %>%
+  summarize(
+    projects = n(),
+    total_cost_mil_usd = round(sum(cost_mil_usd)),
+    median_cost_mil_usd = round(median(cost_mil_usd))
+  )
+
+kable(activity_stats) %>%
+  kable_styling(full_width = FALSE)
+```
+
+### Phase 1 dredging project outliers
+```{r results = "asis", echo = FALSE}
+projects_over_750 <- dredging_plan_df %>%
+  filter(750 <= cost_mil_usd) %>%
+  arrange(desc(cost_mil_usd)) %>%
+  select(location, cost_mil_usd, activity, zone, agency)
+
+projects_over_750$cost_mil_usd <- round(projects_over_750$cost_mil_usd)
+
+kable(projects_over_750) %>%
+  kable_styling(full_width = FALSE)
+```
+
+### Phase 1 dredging project statistics, by agency
+```{r results = "asis", echo = FALSE}
+agency_stats <- dredging_plan_df %>%
+  group_by(agency) %>%
+  summarize(
+    projects = n(),
+    total_cost_mil_usd = round(sum(cost_mil_usd)),
+    median_cost_mil_usd = round(median(cost_mil_usd))
+  ) %>%
+  arrange(desc(projects))
+
+kable(agency_stats) %>%
+  kable_styling(full_width = FALSE)
+```
+
+### Phase 1 dredging project statistics, by activity
+```{r results = "asis", echo = FALSE}
+activity_stats <- dredging_plan_df %>%
+  group_by(activity) %>%
+  summarize(
+    projects = n(),
+    total_cost_mil_usd = round(sum(cost_mil_usd)),
+    median_cost_mil_usd = round(median(cost_mil_usd))
+  )
+
+kable(activity_stats) %>%
+  kable_styling(full_width = FALSE)
+```

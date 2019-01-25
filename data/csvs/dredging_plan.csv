@@ -1,0 +1,224 @@
+phase,si,id,zone,activity,location,agency,cost_mil_usd
+1,1,NW-20,"Northern Zone, Rangpur",dredging,Kumlal-Nautara River,BWDB,6.52
+1,2,NW-29,"Northern Zone, Rangpur",dredging,Gidari River,BWDB,5.27
+1,3,NW-30,"Northern Zone, Rangpur",dredging,Girai River,BWDB,39.55
+1,4,NW-47,"Northern Zone, Rangpur",dredging,Choto Senua River,BWDB,0.56
+1,5,NW-75,"Northern Zone, Rangpur",dredging,Phulkumar,BWDB,17.51
+1,6,NW-97,"Northern Zone, Rangpur",dredging,Maldaha River,BWDB,4.48
+1,7,NW-101,"Northern Zone, Rangpur",dredging,Ratnai (Lalmonirhat) River,BWDB,2.81
+1,8,NW-112,"Northern Zone, Rangpur",dredging,Senua River,BWDB,3.66
+1,1,18,"Northern Zone, Rangpur",dredging,Atrai River,BIWTA,269.47
+1,2,48,"Northern Zone, Rangpur",dredging,Dharla River,BIWTA,280.39
+1,3,78,"Northern Zone, Rangpur",dredging,Dudkumer River,BIWTA,105.83
+1,4,117,"Northern Zone, Rangpur",dredging,Old Brahmaputra River,BIWTA,131.45
+1,5,127,"Northern Zone, Rangpur",dredging,Sua River,BIWTA,42.73
+1,6,128,"Northern Zone, Rangpur",dredging,Tulai River,BIWTA,29.02
+1,7,130,"Northern Zone, Rangpur",dredging,Punarbhaba River,BIWTA,260.47
+1,1,NA,"Northern Zone, Rangpur",re-excavation,Panchagarh district,LGED,15.23
+1,2,NA,"Northern Zone, Rangpur",re-excavation,Thakurgaon district,LGED,13.39
+1,3,NA,"Northern Zone, Rangpur",re-excavation,Dinajpur district,LGED,59.19
+1,4,NA,"Northern Zone, Rangpur",re-excavation,Nilphamari district,LGED,2.66
+1,5,NA,"Northern Zone, Rangpur",re-excavation,Lalmonirhat district,LGED,9.16
+1,6,NA,"Northern Zone, Rangpur",re-excavation,Kurigram district,LGED,9.8
+1,7,NA,"Northern Zone, Rangpur",re-excavation,Rangpur district,LGED,33.7
+1,8,NA,"Northern Zone, Rangpur",re-excavation,Gaibandha district,LGED,11.28
+1,1,NW-4,"North Western Zone, Rajshahi",dredging,Atrai (Naogaon-Natore) River,BWDB,44.69
+1,2,NW-5,"North Western Zone, Rajshahi",dredging,Atrai (Pabna) River,BWDB,13.84
+1,3,NW-15,"North Western Zone, Rajshahi",dredging,Kageshawary River,BWDB,5.1
+1,4,NW-33,"North Western Zone, Rajshahi",dredging,Gohala River,BWDB,28.29
+1,5,NW-78,"North Western Zone, Rajshahi",dredging,Baral Lower (Pabna) River,BWDB,13.64
+1,6,NW-80,"North Western Zone, Rajshahi",dredging,Badai River,BWDB,16.62
+1,7,NW-109,"North Western Zone, Rajshahi",dredging,Shirmakhali River,BWDB,4.17
+1,1,32,"North Western Zone, Rajshahi",dredging,Hurasagor River,BIWTA,34.83
+1,2,52,"North Western Zone, Rajshahi",dredging,Baral-Nadakuja River,BIWTA,238.53
+1,3,69,"North Western Zone, Rajshahi",dredging,Atrai River,BIWTA,691.33
+1,4,76,"North Western Zone, Rajshahi",dredging,Mohananda River,BIWTA,151.98
+1,5,76,"North Western Zone, Rajshahi",dredging,Punarbhaba River,BIWTA,59.67
+1,6,90,"North Western Zone, Rajshahi",dredging,Karatoya River,BIWTA,301.51
+1,1,NA,"North Western Zone, Rajshahi",re-excavation,Bogra district,LGED,49.03
+1,2,NA,"North Western Zone, Rajshahi",re-excavation,Joypurhat district,LGED,36.53
+1,3,NA,"North Western Zone, Rajshahi",re-excavation,Pabna district,LGED,23.74
+1,4,NA,"North Western Zone, Rajshahi",re-excavation,Sirajgonj district,LGED,29.48
+1,5,NA,"North Western Zone, Rajshahi",re-excavation,Naogaon district,LGED,60.18
+1,6,NA,"North Western Zone, Rajshahi",re-excavation,Chapai Nawabganj district,LGED,25.9
+1,7,NA,"North Western Zone, Rajshahi",re-excavation,Rajshahi district,LGED,43.74
+1,8,NA,"North Western Zone, Rajshahi",re-excavation,Natore district,LGED,21.41
+1,1,SW-17,"South Western Zone, Kulna",dredging,Kazibachi River,BWDB,140.51
+1,2,SW-50,"South Western Zone, Kulna",dredging,Old Passer River,BWDB,11.34
+1,3,SW-53,"South Western Zone, Kulna",dredging,Pangucchi River,BWDB,9.86
+1,4,SW-68,"South Western Zone, Kulna",dredging,Bhairab River,BWDB,144
+1,5,SW-71,"South Western Zone, Kulna",dredging,Bhola (Bagerhat) River,BWDB,179.46
+1,6,SW-72,"South Western Zone, Kulna",dredging,Mongla River,BWDB,61.13
+1,7,SW-73,"South Western Zone, Kulna",dredging,Mukteshwari-teka River,BWDB,15.32
+1,8,SW-77,"South Western Zone, Kulna",dredging,Madargang River,BWDB,312.37
+1,9,SW-97,"South Western Zone, Kulna",dredging,Harihar River,BWDB,3.63
+1,1,6,"South Western Zone, Kulna",dredging,M-G Canal,BIWTA,79.14
+1,2,6,"South Western Zone, Kulna",dredging,Kacha River,BIWTA,48.09
+1,3,6,"South Western Zone, Kulna",dredging,Putimari River,BIWTA,47.81
+1,4,6,"South Western Zone, Kulna",dredging,Pasur River,BIWTA,386.47
+1,5,6,"South Western Zone, Kulna",dredging,Meghna River,BIWTA,48.09
+1,6,6,"South Western Zone, Kulna",dredging,Rupsa River,BIWTA,97.13
+1,7,16,"South Western Zone, Kulna",dredging,Bhairab River,BIWTA,194.03
+1,8,16,"South Western Zone, Kulna",dredging,Nabaganga River,BIWTA,136.91
+1,9,16,"South Western Zone, Kulna",dredging,Madhumati River,BIWTA,49.22
+1,10,40,"South Western Zone, Kulna",dredging,Dhakiaidah River,BIWTA,65.91
+1,11,40,"South Western Zone, Kulna",dredging,Malancha River,BIWTA,25.88
+1,12,40,"South Western Zone, Kulna",dredging,Arpangasia River,BIWTA,162.5
+1,13,40,"South Western Zone, Kulna",dredging,Majhabhaga Khal River,BIWTA,92.07
+1,14,40,"South Western Zone, Kulna",dredging,Jumuna River,BIWTA,63.45
+1,15,46,"South Western Zone, Kulna",dredging,Kobadak River,BIWTA,576.96
+1,16,95,"South Western Zone, Kulna",dredging,Shibsha River,BIWTA,58.97
+1,17,95,"South Western Zone, Kulna",dredging,Khulpetua River,BIWTA,68.21
+1,1,NA,"South Western Zone, Kulna",re-excavation,Jessore district,LGED,33.66
+1,2,NA,"South Western Zone, Kulna",re-excavation,Khulna district,LGED,17.98
+1,3,NA,"South Western Zone, Kulna",re-excavation,Satkhira district,LGED,87.81
+1,4,NA,"South Western Zone, Kulna",re-excavation,Bagerhat district,LGED,53.66
+1,5,NA,"South Western Zone, Kulna",re-excavation,Narail district,LGED,14.49
+1,1,SW-28,"Western Zone, Faridpur",dredging,Ghagar River,BWDB,12.23
+1,2,SW-46,"Western Zone, Faridpur",dredging,Naria Khal,BWDB,6.23
+1,3,SW-54,"Western Zone, Faridpur",dredging,Palang River,BWDB,27.6
+1,4,SW-68,"Western Zone, Faridpur",dredging,Bhairab River,BWDB,66.26
+1,1,16,"Western Zone, Faridpur",dredging,Madhumati River,BIWTA,146
+1,2,17,"Western Zone, Faridpur",dredging,Upper Kumar River,BIWTA,141.15
+1,3,17,"Western Zone, Faridpur",dredging,Madaripur Beel Route River,BIWTA,205.39
+1,4,25,"Western Zone, Faridpur",dredging,Arial Khan River,BIWTA,425.12
+1,5,25,"Western Zone, Faridpur",dredging,Torki Nala River,BIWTA,25.94
+1,6,26,"Western Zone, Faridpur",dredging,Chandana/Barasia River,BIWTA,65.61
+1,7,NA,"Western Zone, Faridpur",dredging,Chandana River,BIWTA,69.94
+1,8,34,"Western Zone, Faridpur",dredging,Naya Bhangni River,BIWTA,37.04
+1,9,39,"Western Zone, Faridpur",dredging,Palang River,BIWTA,89.04
+1,1,NA,"Western Zone, Faridpur",re-excavation,Faridpur district,LGED,18.01
+1,2,NA,"Western Zone, Faridpur",re-excavation,Gopalgang district,LGED,23.84
+1,3,NA,"Western Zone, Faridpur",re-excavation,Madaripur district,LGED,46.51
+1,4,NA,"Western Zone, Faridpur",re-excavation,Shariatpur district,LGED,13.01
+1,5,NA,"Western Zone, Faridpur",re-excavation,Rajbari district,LGED,4.39
+1,6,NA,"Western Zone, Faridpur",re-excavation,Kushtia district,LGED,15.51
+1,7,NA,"Western Zone, Faridpur",re-excavation,Meherpur district,LGED,11.26
+1,8,NA,"Western Zone, Faridpur",re-excavation,Chuadanga district,LGED,13.55
+1,9,NA,"Western Zone, Faridpur",re-excavation,Magura district,LGED,63.06
+1,10,NA,"Western Zone, Faridpur",re-excavation,Jhinedha district,LGED,20.3
+1,1,SW-82,"Southern Zone, Barisal",dredging,Rabnabad River,BWDB,704.43
+1,2,NA,"Southern Zone, Barisal",dredging,Shahbazpur Channel,BWDB,29144.85
+1,3,SW-37,"Southern Zone, Barisal",dredging,Tiakhali River,BWDB,38.09
+1,4,SW-90,"Southern Zone, Barisal",dredging,Sugandha River,BWDB,79.65
+1,1,2,"Southern Zone, Barisal",dredging,Azimpur River,BIWTA,59.7
+1,2,6,"Southern Zone, Barisal",dredging,Gabkhan Khal River,BIWTA,46
+1,3,6,"Southern Zone, Barisal",dredging,Swarupkati River,BIWTA,29.64
+1,4,6,"Southern Zone, Barisal",dredging,Kacha River,BIWTA,88.55
+1,5,15,"Southern Zone, Barisal",dredging,Kirtonkhola River,BIWTA,213.51
+1,6,15,"Southern Zone, Barisal",dredging,Bishkhali River,BIWTA,208.62
+1,7,15,"Southern Zone, Barisal",dredging,Jangalia River,BIWTA,15.03
+1,8,15,"Southern Zone, Barisal",dredging,Khagdon River,BIWTA,25.59
+1,9,22,"Southern Zone, Barisal",dredging,Tentulia River,BIWTA,555.9
+1,10,25,"Southern Zone, Barisal",dredging,Arial Khan River,BIWTA,120.7
+1,11,25,"Southern Zone, Barisal",dredging,Torki Nala River,BIWTA,21.95
+1,12,27,"Southern Zone, Barisal",dredging,Baiserkandi Khal,BIWTA,27.28
+1,13,27,"Southern Zone, Barisal",dredging,Belua River,BIWTA,21.76
+1,14,29,"Southern Zone, Barisal",dredging,Nehalganj River,BIWTA,106.76
+1,15,36,"Southern Zone, Barisal",dredging,Kaliganga River,BIWTA,65.86
+1,16,NA,"Southern Zone, Barisal",dredging,Madhumoti River,BIWTA,42.64
+1,17,47,"Southern Zone, Barisal",dredging,Andarmanik River,BIWTA,310.76
+1,18,47,"Southern Zone, Barisal",dredging,Tangibari Khal,BIWTA,66.04
+1,19,47,"Southern Zone, Barisal",dredging,Khairabad River,BIWTA,55.48
+1,20,47,"Southern Zone, Barisal",dredging,Pandab River,BIWTA,34.09
+1,21,47,"Southern Zone, Barisal",dredging,Lohalia River,BIWTA,124.85
+1,22,47,"Southern Zone, Barisal",dredging,Galachipa River,BIWTA,130.83
+1,1,NA,"Southern Zone, Barisal",re-excavation,Barisal district,LGED,50.18
+1,2,NA,"Southern Zone, Barisal",re-excavation,Pirokpur district,LGED,34.86
+1,3,NA,"Southern Zone, Barisal",re-excavation,Jhalokathi district,LGED,12.96
+1,4,NA,"Southern Zone, Barisal",re-excavation,Bhola district,LGED,30.99
+1,5,NA,"Southern Zone, Barisal",re-excavation,Barguna district,LGED,25.86
+1,6,NA,"Southern Zone, Barisal",re-excavation,Patuakhali district,LGED,103.83
+1,1,NC-61,"Central Zone, Dhaka",dredging,Haridoya River,BWDB,18.76
+1,2,NE-5,"Central Zone, Dhaka",dredging,Updakhali River,BWDB,55.31
+1,3,NE-22,"Central Zone, Dhaka",dredging,Khowai River,BWDB,12.85
+1,4,NE-23,"Central Zone, Dhaka",dredging,Gumai River,BWDB,3.75
+1,5,NE-26,"Central Zone, Dhaka",dredging,Ghora Utra River,BWDB,239.4
+1,6,NE-85,"Central Zone, Dhaka",dredging,Someswari River,BWDB,93.73
+1,7,NE-86,"Central Zone, Dhaka",dredging,Someswari (Dharmapasha) River,BWDB,11.85
+1,1,3,"Central Zone, Dhaka",dredging,Ichamati River,BIWTA,94.4
+1,2,4,"Central Zone, Dhaka",dredging,Kaliganga River,BIWTA,252.01
+1,3,4,"Central Zone, Dhaka",dredging,Dhaleshwari River,BIWTA,555.01
+1,4,5,"Central Zone, Dhaka",dredging,Turag River,BIWTA,107.97
+1,5,5,"Central Zone, Dhaka",dredging,Labundha River,BIWTA,35.48
+1,6,11,"Central Zone, Dhaka",dredging,Arial Kha River,BIWTA,154.6
+1,7,21,"Central Zone, Dhaka",dredging,Karnapara Canal,BIWTA,25.16
+1,8,24,"Central Zone, Dhaka",dredging,Talta Khal,BIWTA,34.39
+1,9,33,"Central Zone, Dhaka",dredging,Shitalakhya River,BIWTA,483.25
+1,10,64,"Central Zone, Dhaka",dredging,Buriganga River,BIWTA,126.45
+1,11,64,"Central Zone, Dhaka",dredging,Tongi Khal River,BIWTA,84.2
+1,1,7,"Central Zone, Dhaka",dredging,Baulai River,BIWTA,268.87
+1,2,7,"Central Zone, Dhaka",dredging,Dhanu River,BIWTA,228.17
+1,3,19,"Central Zone, Dhaka",dredging,Mogra River,BIWTA,149.51
+1,4,53,"Central Zone, Dhaka",dredging,Old Brahmaputra River,BIWTA,4869.25
+1,1,NA,"Central Zone, Dhaka",re-excavation,Dhaka district,LGED,24.26
+1,2,NA,"Central Zone, Dhaka",re-excavation,Narayanganj district,LGED,17.7
+1,3,NA,"Central Zone, Dhaka",re-excavation,Munshiganj district,LGED,22.38
+1,4,NA,"Central Zone, Dhaka",re-excavation,Manikganj district,LGED,16.93
+1,5,NA,"Central Zone, Dhaka",re-excavation,Narsinghdi district,LGED,8.08
+1,6,NA,"Central Zone, Dhaka",re-excavation,Gazipur district,LGED,25.23
+1,7,NA,"Central Zone, Dhaka",re-excavation,Tangail district,LGED,62.33
+1,8,NA,"Central Zone, Dhaka",re-excavation,Mymensingh district,LGED,44.4
+1,9,NA,"Central Zone, Dhaka",re-excavation,Jamalpur district,LGED,55.78
+1,10,NA,"Central Zone, Dhaka",re-excavation,Sherpur district,LGED,7
+1,11,NA,"Central Zone, Dhaka",re-excavation,Netrokona district,LGED,27.55
+1,12,NA,"Central Zone, Dhaka",re-excavation,Kishoreganj district,LGED,48.08
+1,1,NE-5,"North Eastern Zone, Sylhet",dredging,Updakhali River,BWDB,18.04
+1,2,NE-22,"North Eastern Zone, Sylhet",dredging,Khowai River,BWDB,283.39
+1,3,NE-23,"North Eastern Zone, Sylhet",dredging,Gumai River,BWDB,0.38
+1,4,NE-86,"North Eastern Zone, Sylhet",dredging,Someswari (Dharmapasha) River,BWDB,67.16
+1,5,SE-3,"North Eastern Zone, Sylhet",dredging,Kasti River,BWDB,13.71
+1,6,SE-19,"North Eastern Zone, Sylhet",dredging,Lahar River,BWDB,2.63
+1,7,SE-20,"North Eastern Zone, Sylhet",dredging,Longon Bolvodra River,BWDB,10.05
+1,8,SE-23,"North Eastern Zone, Sylhet",dredging,Sonai River,BWDB,9.68
+1,1,7,"North Eastern Zone, Sylhet",dredging,Surma River,BIWTA,681.13
+1,2,7,"North Eastern Zone, Sylhet",dredging,Dhanu/Baulai River,BIWTA,78.51
+1,3,8,"North Eastern Zone, Sylhet",dredging,Kangsa River,BIWTA,49.03
+1,4,9,"North Eastern Zone, Sylhet",dredging,Zadukata River,BIWTA,117.68
+1,5,20,"North Eastern Zone, Sylhet",dredging,Manu River,BIWTA,210.72
+1,6,41,"North Eastern Zone, Sylhet",dredging,Piyain River,BIWTA,114.58
+1,7,42,"North Eastern Zone, Sylhet",dredging,Kushiara River,BIWTA,722.83
+1,8,42,"North Eastern Zone, Sylhet",dredging,Kalni River,BIWTA,136.09
+1,1,NA,"North Eastern Zone, Sylhet",re-excavation,Sylhet district,LGED,30.38
+1,2,NA,"North Eastern Zone, Sylhet",re-excavation,Sunamganj district,LGED,24.84
+1,3,NA,"North Eastern Zone, Sylhet",re-excavation,Hobiganj district,LGED,67.61
+1,4,NA,"North Eastern Zone, Sylhet",re-excavation,Moulavibazar district,LGED,22.04
+1,1,SE-2,"Eastern Zone, Comilla",dredging,Kakri River,BWDB,2.24
+1,2,SE-3,"Eastern Zone, Comilla",dredging,Kasti River,BWDB,6.7
+1,3,SE-6,"Eastern Zone, Comilla",dredging,Little Feni River,BWDB,252.73
+1,4,SE-9,"Eastern Zone, Comilla",dredging,Titas River,BWDB,224.7
+1,5,SE-16,"Eastern Zone, Comilla",dredging,Muhuri River,BWDB,64.82
+1,6,SE-19,"Eastern Zone, Comilla",dredging,Lahar River,BWDB,8.56
+1,7,SE-20,"Eastern Zone, Comilla",dredging,Longon Bolvodra River,BWDB,17
+1,8,SE-22,"Eastern Zone, Comilla",dredging,Selonia River,BWDB,40.75
+1,9,SE-23,"Eastern Zone, Comilla",dredging,Sonai River,BWDB,2.85
+1,10,SE-24,"Eastern Zone, Comilla",dredging,Hawra River,BWDB,4.44
+1,11,SE-18,"Eastern Zone, Comilla",dredging,Meghna (lower) River,BWDB,22633.14
+1,12,SE-17,"Eastern Zone, Comilla",dredging,Meghna (upper) River,BWDB,38936.59
+1,1,10,"Eastern Zone, Comilla",dredging,Pagla River,BIWTA,182.72
+1,2,10,"Eastern Zone, Comilla",dredging,Buri River,BIWTA,97.58
+1,3,13,"Eastern Zone, Comilla",dredging,Titas River,BIWTA,287.05
+1,4,14,"Eastern Zone, Comilla",dredging,Dakota River,BIWTA,203.56
+1,5,67,"Eastern Zone, Comilla",dredging,Gumti River,BIWTA,173.91
+1,1,NA,"Eastern Zone, Comilla",re-excavation,Comilla district,LGED,71.69
+1,2,NA,"Eastern Zone, Comilla",re-excavation,B. Baria district,LGED,21.78
+1,3,NA,"Eastern Zone, Comilla",re-excavation,Chandpur district,LGED,20.6
+1,4,NA,"Eastern Zone, Comilla",re-excavation,Noakhali district,LGED,87.66
+1,5,NA,"Eastern Zone, Comilla",re-excavation,Laxmipur district,LGED,28.29
+1,6,NA,"Eastern Zone, Comilla",re-excavation,Feni district,LGED,7.41
+1,1,EH-1,"South Eastern Zone, Chittagong",dredging,Ichamati (Rangamati) River,BWDB,8.96
+1,2,EH-2,"South Eastern Zone, Chittagong",dredging,Eidgaon River,BWDB,62.01
+1,3,EH-8,"South Eastern Zone, Chittagong",dredging,Bura Matamuhuri River,BWDB,24.13
+1,4,EH-10,"South Eastern Zone, Chittagong",dredging,Bharuakhali Khal,BWDB,50.33
+1,5,EH-11,"South Eastern Zone, Chittagong",dredging,Bhola Khal,BWDB,25.61
+1,1,1,"South Eastern Zone, Chittagong",dredging,Bay of Bengal,BIWTA,643.84
+1,2,1,"South Eastern Zone, Chittagong",dredging,Kutubia Channel,BIWTA,330
+1,3,1,"South Eastern Zone, Chittagong",dredging,Maheskhli Channel,BIWTA,193.84
+1,4,44,"South Eastern Zone, Chittagong",dredging,Karnakuli River,BIWTA,576.36
+1,5,62,"South Eastern Zone, Chittagong",dredging,Baghkhali River,BIWTA,174.79
+1,6,146,"South Eastern Zone, Chittagong",dredging,Kaptai Lake,BIWTA,413.96
+1,1,NA,"South Eastern Zone, Chittagong",re-excavation,Khagrachari district,LGED,4.99
+1,2,NA,"South Eastern Zone, Chittagong",re-excavation,Rangamati district,LGED,1.61
+1,3,NA,"South Eastern Zone, Chittagong",re-excavation,Bandarban district,LGED,11.66
+1,4,NA,"South Eastern Zone, Chittagong",re-excavation,Chittagong district,LGED,71.15
+1,5,NA,"South Eastern Zone, Chittagong",re-excavation,Cox’s Bazar district,LGED,32.28

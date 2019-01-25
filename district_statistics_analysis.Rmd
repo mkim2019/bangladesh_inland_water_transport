@@ -1,0 +1,448 @@
+---
+title: "District Statistics 2011 analysis"
+author: "Tristan Kindig"
+date: "January 19, 2019"
+output:
+  html_notebook:
+    toc: yes
+---
+
+```{r include = FALSE}
+# import libraries
+library(ggrepel)
+library(kableExtra)
+library(purrr)
+library(sf)
+library(tidyverse)
+
+# load CSV data
+dredging_plan_df <- read_csv("./data/csvs/dredging_plan.csv")
+district_statistics_df <- read_csv("./data/csvs/district_statistics.csv")
+
+# load shapefile data
+bgd_nation_sf <- st_read("./data/shapefiles/bgd_nation/bgd_nation.shp")
+bgd_divisions_sf <- st_read("./data/shapefiles/bgd_divisions/bgd_divisions.shp")
+bgd_districts_sf <- st_read("./data/shapefiles/bgd_districts/bgd_districts.shp")
+bgd_hydrology_sf <- st_read("./data/shapefiles/bgd_hydrology/bgd_hydrology.shp")
+bgd_iwt_routes_sf <- st_read("./data/shapefiles/bgd_iwt_routes/bgd_iwt_routes.shp")
+bgd_ports_sf <- st_read("./data/shapefiles/bgd_ports/bgd_ports.shp")
+
+# add population density, midpoint temperature, riverine area percentage, agricultural output, and waterways/sq_km to district_statistics_df
+district_statistics_df <- district_statistics_df %>%
+  mutate(
+    density_pop_per_sq_km = round(population / total_area_sq_km),
+    midpoint_temperature = round(
+      (max_temp_c + min_temp_c) / 2,
+      1
+    ),
+    riverine_area_percentage = round(riverine_area_sq_km / total_area_sq_km * 100),
+    agricultural_product_metric_ton = (rice_metric_ton + wheat_metric_ton + sugarcane_metric_ton + potato_metric_ton),
+    monsoon_waterway_km_per_sq_km = round(waterway_monsoon_season_km / total_area_sq_km)
+  ) %>%
+  arrange(district)
+
+# remove unnecessary attributes from bgd_districts_sf
+undesired_columns <- c("ADM2_PCODE", "ADM2_REF", "ADM2ALT1EN", "ADM2ALT2EN", "ADM1_EN", "ADM1_PCODE", "ADM0_EN", "ADM0_PCODE", "date", "validOn", "ValidTo")
+bgd_districts_sf <- bgd_districts_sf %>%
+  modify_at(undesired_columns, ~NULL)
+
+# convert factor attributes to character attributes
+bgd_divisions_sf$ADM1_EN <- as.character(bgd_divisions_sf$ADM1_EN)
+bgd_districts_sf$ADM2_EN <- as.character(bgd_districts_sf$ADM2_EN)
+bgd_ports_sf$River_Port <- as.character(bgd_ports_sf$River_Port)
+
+# create division_statistics_df
+div_stats_part_1 <- district_statistics_df %>%
+  group_by(division) %>%
+  summarize_at(
+    c("total_area_sq_km", "riverine_area_sq_km", "population", "rainfall_meters", "rice_metric_ton", "wheat_metric_ton", "sugarcane_metric_ton", "potato_metric_ton", "road_km", "railway_km", "waterway_monsoon_season_km", "waterway_year_round_km", "railway_station", "steamer_station", "bus_station"),
+    sum,
+    na.rm = TRUE
+  )
+div_stats_part_2 <- district_statistics_df %>%
+  group_by(division) %>%
+  summarize_at(
+    c("max_temp_c", "min_temp_c", "midpoint_temperature"),
+    median,
+    na.rm = TRUE
+  )
+division_statistics_df <- left_join(div_stats_part_1, div_stats_part_2, by = "division")
+
+# add population density, midpoint temperature, riverine area percentage, total agricultural output, and waterways/sq_km to division_statistics_df
+division_statistics_df <- division_statistics_df %>%
+  mutate(
+    density_pop_per_sq_km = round(population / total_area_sq_km),
+    riverine_area_percentage = round(riverine_area_sq_km / total_area_sq_km * 100),
+    agricultural_product_metric_ton = (rice_metric_ton + wheat_metric_ton + sugarcane_metric_ton + potato_metric_ton),
+    monsoon_waterway_km_per_sq_km = round(waterway_monsoon_season_km / total_area_sq_km, 1)
+  ) %>%
+  arrange(division)
+
+# join df to sf
+bgd_divisions_sf <- left_join(bgd_divisions_sf, division_statistics_df, by=c("ADM1_EN" = "division"))
+bgd_districts_sf <- left_join(bgd_districts_sf, district_statistics_df, by=c("ADM2_EN" = "district"))
+
+# rename Pangaon Port to Pangaon
+bgd_ports_sf <- bgd_ports_sf %>% 
+    mutate(River_Port = replace(River_Port, River_Port == "Pangaon Port", "Pangaon"))
+```
+
+
+
+## Population
+
+### Population by division (column chart)
+```{r echo = FALSE}
+ggplot(division_statistics_df) +
+  geom_col(
+    aes(
+      reorder(division, population),
+      population/1000000
+    ),
+    fill = "red"
+  ) +
+  geom_text(
+    aes(
+      x = division, 
+      y = population/1000000 + 1,
+      label = round(population/1000000, 1)
+    )
+  ) +
+  labs(
+    x = "Division",
+    y = "Population (mil)"
+  )
+```
+
+### Population density by division (chloropleth map)
+```{r echo = FALSE}
+ggplot(bgd_divisions_sf) +
+  geom_sf(
+    aes(fill = density_pop_per_sq_km)
+  ) +
+  scale_fill_gradient(low = "white", high = "red") +
+  labs(
+    fill = "Population density",
+    x = "Longitude",
+    y = "Latitude"
+  )
+```
+
+
+### Population density by district (chloropleth map)
+```{r echo = FALSE}
+bgd_districts_sf_minus_narayanganj <- bgd_districts_sf %>%
+  filter(
+    density_pop_per_sq_km < 4000
+  )
+
+ggplot(bgd_districts_sf_minus_narayanganj) +
+  geom_sf(
+    aes(fill = density_pop_per_sq_km)
+  ) +
+  scale_fill_gradient(low = "white", high = "red") +
+  labs(
+    x = "Longitude",
+    y = "Latitude",
+    fill = "Population density",
+    subtitle = "Narayanganj (4300) removed"
+  )
+```
+
+### Population density by district (percentage histogram)
+```{r echo = FALSE}
+ggplot(district_statistics_df, aes(x = population/total_area_sq_km)) +  
+  geom_histogram(
+    aes(
+      y = (..count..)/sum(..count..)
+    ),
+    breaks = seq(0, 2000, 200),
+    fill = "red"
+  ) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_x_continuous(breaks = seq(0, 2000, 200)) +
+  labs(
+    subtitle = "n = 63; 1 outlier (Narayanganj, 4300) removed",
+    x = "Population density",
+    y = "Percentage"
+  )
+```
+
+
+
+## Meterology
+
+### Temp by division
+```{r echo = FALSE}
+ggplot(bgd_divisions_sf) +
+  geom_sf(
+    aes(fill = midpoint_temperature)
+  ) +
+  scale_fill_gradient2(
+    low = "blue",
+    mid = "white",
+    high = "red",
+    midpoint = median(division_statistics_df$midpoint_temperature)
+  ) +
+  labs(
+    fill = "Temperature",
+    x = "Longitude",
+    y = "Latitude"
+  )
+```
+
+### Temp by district
+```{r echo = FALSE}
+ggplot(bgd_districts_sf) +
+  geom_sf(
+    aes(fill = midpoint_temperature)
+  ) +
+  scale_fill_gradient2(
+    low = "blue",
+    mid = "white",
+    high = "red",
+    midpoint = median(district_statistics_df$midpoint_temperature)
+  ) +
+  labs(
+    fill = "Temperature",
+    x = "Longitude",
+    y = "Latitude"
+  )
+```
+
+### Annual rainfall, by district
+```{r echo = FALSE}
+ggplot(bgd_districts_sf) +
+  geom_sf(
+    aes(fill = rainfall_meters / total_area_sq_km)
+  ) +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(
+    x = "Longitude",
+    y = "Latitude",
+    fill = expression(
+      paste(
+        "Annual rainfall (",
+        frac(
+          "m",
+          paste("km"^"2")
+        ),
+        ")"
+      )
+    )
+  )
+```
+
+
+
+## Hydrology
+
+### Hydrological map of Bangladesh
+```{r echo = FALSE, results = "hide", fig.keep = "all"}
+ggplot() +
+geom_sf(
+  data = bgd_nation_sf,
+  color = "light green",
+  fill = "light green"
+) +
+geom_sf(
+  data = bgd_hydrology_sf,
+  color = "dark blue",
+  fill = "light blue"
+) +
+labs(
+  x = "Longitude",
+  y = "Latitude"
+)
+```
+
+### Riverine area percentage by district
+```{r echo = FALSE}
+ggplot(bgd_districts_sf) +
+  geom_sf(
+    aes(fill = riverine_area_percentage)
+  ) +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(
+    x = "Longitude",
+    y = "Latitude",
+    fill = "Riverine area (percentage)"
+  )
+```
+
+### Monsoon season waterways
+```{r echo = FALSE}
+ggplot(bgd_districts_sf) +
+  geom_sf(
+    aes(fill = (waterway_monsoon_season_km/total_area_sq_km))
+  ) +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(
+    x = "Longitude",
+    y = "Latitude",
+    fill = expression(
+      paste(
+        "Monsoon season waterway length (",
+        frac(
+          "km",
+          paste("km"^"2")
+        ),
+        ")"
+      )
+    )
+  )
+```
+
+
+
+## Agriculture
+
+### Agricultural production by division (chloropleth map)
+```{r echo = FALSE}
+ggplot(bgd_divisions_sf) +
+  geom_sf(
+    aes(fill = agricultural_product_metric_ton/total_area_sq_km)
+  ) +
+  scale_fill_gradient(low = "white", high = "green") +
+  labs(
+    x = "Longitude",
+    y = "Latitude",
+    fill = expression(
+      paste(
+        "Agricultural production (",
+        frac(
+          "metric tons",
+          paste("km"^"2")
+        ),
+        ")"
+      )
+    )
+  )
+```
+
+### Agricultural production by district (chloropleth map)
+```{r echo = FALSE}
+ggplot(bgd_districts_sf) +
+  geom_sf(
+    aes(fill = agricultural_product_metric_ton/total_area_sq_km)
+  ) +
+  scale_fill_gradient(low = "white", high = "green") +
+  labs(
+    x = "Longitude",
+    y = "Latitude",
+    fill = expression(
+      paste(
+        "Agricultural production (",
+        frac(
+          "metric tons",
+          paste("km"^"2")
+        ),
+        ")"
+      )
+    )
+  )
+```
+
+### Agricultural production by district (percentage histogram)
+```{r echo = FALSE}
+ggplot(district_statistics_df, aes(x = agricultural_product_metric_ton/total_area_sq_km)) +  
+  geom_histogram(
+    aes(
+      y = (..count..)/sum(..count..)
+    ),
+    breaks = seq(0, 1750, 175),
+    fill = "green",
+    na.rm = TRUE
+  ) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_x_continuous(breaks = seq(0, 1750, 175)) +
+  labs(
+    x = "Agr product mt / sq_km",
+    y = "Percentage"
+  )
+```
+
+
+
+## Industry
+
+
+
+## Transportation
+
+### Rivers and ports (chloropleth map, zoomed out)
+```{r echo = FALSE, results = "hide", fig.keep = "all"}
+ggplot() +
+geom_sf(
+  data = bgd_nation_sf,
+  color = "light green",
+  fill = "light green"
+) +
+geom_sf(
+  data = bgd_iwt_routes_sf,
+  color = "blue",
+) +
+geom_sf(
+  data = bgd_ports_sf,
+  color = "red",
+  size = 0.7
+) +
+labs(
+  x = "Longitude",
+  y = "Latitude"
+)
+```
+
+### Rivers and ports (chloropleth map, zoomed in)
+```{r echo = FALSE, results = "hide", fig.keep = "all"}
+ggplot() +
+geom_sf(
+  data = bgd_nation_sf,
+  color = "light green",
+  fill = "light green"
+) +
+geom_sf(
+  data = bgd_iwt_routes_sf,
+  color = "blue",
+) +
+geom_sf(
+  data = bgd_ports_sf,
+  color = "red",
+  size = 1.5
+) +
+geom_text_repel(
+  data = bgd_ports_sf,
+  aes(
+    x = bgd_ports_sf$Longitude,
+    y = bgd_ports_sf$Latitude,
+    label = bgd_ports_sf$River_Port,
+    geometry = geometry
+  ),
+  stat = "sf_coordinates",
+  min.segment.length = 0
+) +
+labs(
+  x = "Longitude",
+  y = "Latitude"
+) +
+coord_sf(
+  xlim = c(89, 92),
+  ylim = c(21.5, 24.25)
+)
+```
+
+
+
+## Data sources
+
+**dredging information**: https://vanderbilt.app.box.com/file/382909402931
+
+**hydrological map shapefile**: https://geonode.wfp.org/layers/geonode:bgd_hyd_major_rivers_py
+
+**port shapefile**: MacKenzie
+
+**river network shapefile**: Amir
+
+**administrative boundary shapefiles**: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
+
+**riverine area, monsoon waterway length, and annual rainfall**: http://203.112.218.65:8008/PageWebMenuContent.aspx?MenuKey=246
