@@ -42,7 +42,7 @@ https://geonode.wfp.org/layers/geonode:bgd_hyd_major_rivers_py
 
 ### bgd_iwt_routes.shp
 
-Tess at UT-Austin (?)
+Tess at UT-Austin
 
 ### bgd_nation.shp
 
@@ -50,7 +50,7 @@ https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2
 
 ### bgd_ports.shp
 
-MacKenzie (?)
+MacKenzie
 
 ### bgd_upazilas.shp
 
