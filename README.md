@@ -2,11 +2,11 @@
 
 ## Dredging Plan Analysis
 
-Processing and visualizing dredging data gathered on the July 2018 trip to Bangladesh. Written by Tristan in R.
+Processing and visualizing dredging data gathered on the July 2018 trip to Bangladesh.
 
 ## District Statistics Analysis
 
-Processing and visualizing data from the Bangladesh Bureau of Statistics' "2011 District Statistics" series. Written by Tristan in R.
+Processing and visualizing data from the Bangladesh Bureau of Statistics' "2011 District Statistics" series.
 
 # Data sources
 
@@ -29,6 +29,8 @@ https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2
 ### bgd_divisions.shp
 
 https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
+
+Updated to reflect the new divisions, Comilla and Faridpur
 
 ### bgd_hydrology.shp
 
