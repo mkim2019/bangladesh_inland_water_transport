@@ -430,19 +430,3 @@ coord_sf(
   ylim = c(21.5, 24.25)
 )
 ```
-
-
-
-## Data sources
-
-**dredging information**: https://vanderbilt.app.box.com/file/382909402931
-
-**hydrological map shapefile**: https://geonode.wfp.org/layers/geonode:bgd_hyd_major_rivers_py
-
-**port shapefile**: MacKenzie
-
-**river network shapefile**: Amir
-
-**administrative boundary shapefiles**: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
-
-**riverine area, monsoon waterway length, and annual rainfall**: http://203.112.218.65:8008/PageWebMenuContent.aspx?MenuKey=246
