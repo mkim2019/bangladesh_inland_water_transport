@@ -34,7 +34,7 @@ https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2
 
 https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
 
-Updated to reflect the new divisions, Comilla and Faridpur
+Updated to reflect the new divisions, Comilla and Faridpur.
 
 ### bgd_hydrology.shp
 
