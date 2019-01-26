@@ -32,22 +32,22 @@ Processing and visualizing data from the Bangladesh Bureau of Statistics' "2011 
 
 *Comments*: Updated to reflect the new divisions, Comilla and Faridpur.
 
-### bgd_hydrology.shp
+## bgd_hydrology.shp
 
 *Source*: https://geonode.wfp.org/layers/geonode:bgd_hyd_major_rivers_py
 
-### bgd_iwt_routes.shp
+## bgd_iwt_routes.shp
 
 *Source*: Tess at UT-Austin
 
-### bgd_nation.shp
+## bgd_nation.shp
 
 *Source*: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
 
-### bgd_ports.shp
+## bgd_ports.shp
 
 *Source*: MacKenzie
 
-### bgd_upazilas.shp
+## bgd_upazilas.shp
 
 *Source*: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
