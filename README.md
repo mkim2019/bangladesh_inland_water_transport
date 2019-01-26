@@ -14,39 +14,39 @@ Processing and visualizing data from the Bangladesh Bureau of Statistics' "2011 
 
 ### district_statistics.csv
 
-Source: http://203.112.218.65:8008/PageWebMenuContent.aspx?MenuKey=246
+**Source**: http://203.112.218.65:8008/PageWebMenuContent.aspx?MenuKey=246
 
-Comments: Only includes the district-level data for selected variables. Does not include the upazila-level data.
+**Comments**: Only includes the district-level data for selected variables. Does not include the upazila-level data.
 
 ### dredging_plan.csv
 
-Source: https://vanderbilt.app.box.com/file/382909402931
+**Source**: https://vanderbilt.app.box.com/file/382909402931
 
-Comments: Does not include the Phase 2 dredging data.
+**Comments**: Does not include the Phase 2 dredging data.
 
 ## shapefiles
 
 ### bgd_districts.shp
 
-Source: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
+**Source**: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
 
 ### bgd_divisions.shp
 
-Source: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
+**Source**: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
 
-Comments: Updated to reflect the new divisions, Comilla and Faridpur.
+**Comments**: Updated to reflect the new divisions, Comilla and Faridpur.
 
 ### bgd_hydrology.shp
 
-Source: https://geonode.wfp.org/layers/geonode:bgd_hyd_major_rivers_py
+**Source**: https://geonode.wfp.org/layers/geonode:bgd_hyd_major_rivers_py
 
 ### bgd_iwt_routes.shp
 
-Source: Tess at UT-Austin
+**Source**: Tess at UT-Austin
 
 ### bgd_nation.shp
 
-Source: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
+**Source**: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
 
 ### bgd_ports.shp
 
