@@ -1,10 +1,10 @@
 # Code
 
-## Dredging Plan Analysis
+## dredging_plan_analysis.Rmd
 
 Processing and visualizing dredging data gathered on the July 2018 trip to Bangladesh.
 
-## District Statistics Analysis
+## district_statistics_analysis.Rmd
 
 Processing and visualizing data from the Bangladesh Bureau of Statistics' "2011 District Statistics" series.
 
