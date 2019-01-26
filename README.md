@@ -14,15 +14,15 @@ Processing and visualizing data from the Bangladesh Bureau of Statistics' "2011 
 
 ### district_statistics.csv
 
-**Source**: http://203.112.218.65:8008/PageWebMenuContent.aspx?MenuKey=246
+*Source*: http://203.112.218.65:8008/PageWebMenuContent.aspx?MenuKey=246
 
-**Comments**: Only includes the district-level data for selected variables. Does not include the upazila-level data.
+*Comments*: Only includes the district-level data for selected variables. Does not include the upazila-level data.
 
 ### dredging_plan.csv
 
-**Source**: https://vanderbilt.app.box.com/file/382909402931
+*Source*: https://vanderbilt.app.box.com/file/382909402931
 
-**Comments**: Does not include the Phase 2 dredging data.
+*Comments*: Does not include the Phase 2 dredging data.
 
 ## shapefiles
 
