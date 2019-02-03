@@ -1,7 +1,7 @@
 ---
 title: "District Statistics 2011 analysis"
 author: "Tristan Kindig"
-date: "January 19, 2019"
+date: "January 30, 2019"
 output:
   html_notebook:
     toc: yes
@@ -85,6 +85,108 @@ bgd_districts_sf <- left_join(bgd_districts_sf, district_statistics_df, by=c("AD
 # rename Pangaon Port to Pangaon
 bgd_ports_sf <- bgd_ports_sf %>% 
     mutate(River_Port = replace(River_Port, River_Port == "Pangaon Port", "Pangaon"))
+
+bgd_districts_minus_narayanganj_sf <- bgd_districts_sf %>%
+  filter(density_pop_per_sq_km <= 4000)
+```
+
+
+
+## Geography
+
+### Divisions (10)
+```{r echo = FALSE}
+ggplot() +
+  geom_sf(
+    data = bgd_divisions_sf,
+    fill = "white"
+  ) +
+  geom_text_repel(
+    data = bgd_divisions_sf,
+    aes(
+      label = bgd_divisions_sf$ADM1_EN,
+      geometry = geometry
+    ),
+    color = "red",
+    stat = "sf_coordinates"
+  ) +
+  labs(
+    x = "Longitude",
+    y = "Latitude"
+  )
+```
+
+?????
+```{r}
+division_statistics_df %>%
+  select("total_area_sq_km")
+
+division_statistics_df[which(is.nan(division_statistics_df$total_area_sq_km))]
+
+class(division_statistics_df$total_area_sq_km)
+
+division_statistics_df %>%
+  mutate_at(
+    vars("total_area_sq_km"),
+    funs(round(., -1000))
+  ) %>%
+  select("total_area_sq_km")
+```
+
+
+### Area by division (column chart)
+```{r echo = FALSE}
+
+
+ggplot(division_statistics_df) +
+  geom_col(
+    aes(
+      reorder(division, total_area_sq_km),
+      total_area_sq_km
+    ),
+    fill = "red"
+  ) +
+  geom_text(
+    aes(
+      x = division, 
+      y = total_area_sq_km + 1,
+      label = round(total_area_sq_km, digits = -1000)
+    )
+  ) +
+  labs(
+    x = "Division",
+    y = "Population (mil)"
+  )
+```
+
+
+
+### Districts (64)
+```{r echo = FALSE}
+ggplot() +
+  geom_sf(
+    data = bgd_districts_sf,
+    aes(fill = division)
+  )
+```
+
+### Area by district (percentage histogram)
+```{r echo = FALSE}
+ggplot(district_statistics_df, aes(x = total_area_sq_km)) +  
+  geom_histogram(
+    aes(
+      y = (..count..)/sum(..count..)
+    ),
+    breaks = seq(0, 6500, 650),
+    fill = "red"
+  ) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_x_continuous(breaks = seq(0, 6500, 650)) +
+  labs(
+    subtitle = "n = 64; 10 bins of width 650",
+    x = "Area (square kilometers)",
+    y = "Percentage"
+  )
 ```
 
 
@@ -122,30 +224,18 @@ ggplot(bgd_divisions_sf) +
   ) +
   scale_fill_gradient(low = "white", high = "red") +
   labs(
-    fill = "Population density",
-    x = "Longitude",
-    y = "Latitude"
-  )
-```
-
-
-### Population density by district (chloropleth map)
-```{r echo = FALSE}
-bgd_districts_sf_minus_narayanganj <- bgd_districts_sf %>%
-  filter(
-    density_pop_per_sq_km < 4000
-  )
-
-ggplot(bgd_districts_sf_minus_narayanganj) +
-  geom_sf(
-    aes(fill = density_pop_per_sq_km)
-  ) +
-  scale_fill_gradient(low = "white", high = "red") +
-  labs(
     x = "Longitude",
     y = "Latitude",
-    fill = "Population density",
-    subtitle = "Narayanganj (4300) removed"
+    fill = expression(
+      paste(
+        "Population density (",
+        frac(
+          "people",
+          paste("km"^"2")
+        ),
+        ")"
+      )
+    )
   )
 ```
 
@@ -162,7 +252,7 @@ ggplot(district_statistics_df, aes(x = population/total_area_sq_km)) +
   scale_y_continuous(labels = scales::percent) +
   scale_x_continuous(breaks = seq(0, 2000, 200)) +
   labs(
-    subtitle = "n = 63; 1 outlier (Narayanganj, 4300) removed",
+    subtitle = "10 bins of width 200; n = 63; 1 outlier (Narayanganj, 4300) removed",
     x = "Population density",
     y = "Percentage"
   )
@@ -172,7 +262,7 @@ ggplot(district_statistics_df, aes(x = population/total_area_sq_km)) +
 
 ## Meterology
 
-### Temp by division
+### Midpoint temperature by division
 ```{r echo = FALSE}
 ggplot(bgd_divisions_sf) +
   geom_sf(
@@ -185,34 +275,15 @@ ggplot(bgd_divisions_sf) +
     midpoint = median(division_statistics_df$midpoint_temperature)
   ) +
   labs(
-    fill = "Temperature",
+    fill = "Midpoint temperature (C)",
     x = "Longitude",
     y = "Latitude"
   )
 ```
 
-### Temp by district
+### Annual rainfall, by division
 ```{r echo = FALSE}
-ggplot(bgd_districts_sf) +
-  geom_sf(
-    aes(fill = midpoint_temperature)
-  ) +
-  scale_fill_gradient2(
-    low = "blue",
-    mid = "white",
-    high = "red",
-    midpoint = median(district_statistics_df$midpoint_temperature)
-  ) +
-  labs(
-    fill = "Temperature",
-    x = "Longitude",
-    y = "Latitude"
-  )
-```
-
-### Annual rainfall, by district
-```{r echo = FALSE}
-ggplot(bgd_districts_sf) +
+ggplot(bgd_divisions_sf) +
   geom_sf(
     aes(fill = rainfall_meters / total_area_sq_km)
   ) +
@@ -256,73 +327,36 @@ labs(
 )
 ```
 
-### Riverine area percentage by district
-```{r echo = FALSE}
-ggplot(bgd_districts_sf) +
-  geom_sf(
-    aes(fill = riverine_area_percentage)
-  ) +
-  scale_fill_gradient(low = "white", high = "blue") +
-  labs(
-    x = "Longitude",
-    y = "Latitude",
-    fill = "Riverine area (percentage)"
-  )
-```
-
-### Monsoon season waterways
-```{r echo = FALSE}
-ggplot(bgd_districts_sf) +
-  geom_sf(
-    aes(fill = (waterway_monsoon_season_km/total_area_sq_km))
-  ) +
-  scale_fill_gradient(low = "white", high = "blue") +
-  labs(
-    x = "Longitude",
-    y = "Latitude",
-    fill = expression(
-      paste(
-        "Monsoon season waterway length (",
-        frac(
-          "km",
-          paste("km"^"2")
-        ),
-        ")"
-      )
-    )
-  )
-```
-
 
 
 ## Agriculture
 
-### Agricultural production by division (chloropleth map)
-```{r echo = FALSE}
-ggplot(bgd_divisions_sf) +
-  geom_sf(
-    aes(fill = agricultural_product_metric_ton/total_area_sq_km)
+### Agricultural production by division (column chart)
+```{r}
+ggplot(division_statistics_df) +
+  geom_col(
+    aes(
+      reorder(division, agricultural_product_metric_ton),
+      agricultural_product_metric_ton/1000000
+    ),
+    fill = "green"
   ) +
-  scale_fill_gradient(low = "white", high = "green") +
-  labs(
-    x = "Longitude",
-    y = "Latitude",
-    fill = expression(
-      paste(
-        "Agricultural production (",
-        frac(
-          "metric tons",
-          paste("km"^"2")
-        ),
-        ")"
-      )
+  geom_text(
+    aes(
+      x = division, 
+      y = agricultural_product_metric_ton/1000000 + 1,
+      label = round(agricultural_product_metric_ton/1000000, 1)
     )
+  ) +
+  labs(
+    x = "Division",
+    y = "Agricultural product (million metric tons)"
   )
 ```
 
-### Agricultural production by district (chloropleth map)
+### Agricultural production by division (chloropleth map)
 ```{r echo = FALSE}
-ggplot(bgd_districts_sf) +
+ggplot(bgd_divisions_sf) +
   geom_sf(
     aes(fill = agricultural_product_metric_ton/total_area_sq_km)
   ) +
@@ -357,20 +391,49 @@ ggplot(district_statistics_df, aes(x = agricultural_product_metric_ton/total_are
   scale_y_continuous(labels = scales::percent) +
   scale_x_continuous(breaks = seq(0, 1750, 175)) +
   labs(
-    x = "Agr product mt / sq_km",
+    subtitle = "n = 63; 10 bins of width 175",
+    x = expression(
+      paste(
+        "Agricultural production (",
+        frac(
+          "metric tons",
+          paste("km"^"2")
+        ),
+        ")"
+      )
+    ),
     y = "Percentage"
   )
 ```
 
 
 
-## Industry
-
-
-
 ## Transportation
 
-### Rivers and ports (chloropleth map, zoomed out)
+### Monsoon season waterways
+```{r echo = FALSE}
+ggplot(bgd_divisions_sf) +
+  geom_sf(
+    aes(fill = (waterway_monsoon_season_km/total_area_sq_km))
+  ) +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(
+    x = "Longitude",
+    y = "Latitude",
+    fill = expression(
+      paste(
+        "Monsoon season waterway length (",
+        frac(
+          "km",
+          paste("km"^"2")
+        ),
+        ")"
+      )
+    )
+  )
+```
+
+### Rivers and ports (map, zoomed out)
 ```{r echo = FALSE, results = "hide", fig.keep = "all"}
 ggplot() +
 geom_sf(
@@ -393,7 +456,7 @@ labs(
 )
 ```
 
-### Rivers and ports (chloropleth map, zoomed in)
+### Rivers and ports (map, zoomed in)
 ```{r echo = FALSE, results = "hide", fig.keep = "all"}
 ggplot() +
 geom_sf(
