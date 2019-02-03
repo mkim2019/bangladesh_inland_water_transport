@@ -1,53 +1,53 @@
-# Projects
+# Code
 
-## Dredging Plan Analysis
+## dredging_plan_analysis.Rmd
 
 Processing and visualizing dredging data gathered on the July 2018 trip to Bangladesh.
 
-## District Statistics Analysis
+## district_statistics_analysis.Rmd
 
 Processing and visualizing data from the Bangladesh Bureau of Statistics' "2011 District Statistics" series.
 
 # Data
 
-## CSVs
+## district_statistics.csv
 
-### district_statistics.csv
+*Source*: http://203.112.218.65:8008/PageWebMenuContent.aspx?MenuKey=246
 
-http://203.112.218.65:8008/PageWebMenuContent.aspx?MenuKey=246
+*Comments*: Only includes the district-level data for selected variables. Does not include any upazila-level data.
 
-### dredging_plan.csv
+## dredging_plan.csv
 
-https://vanderbilt.app.box.com/file/382909402931
+*Source*: https://vanderbilt.app.box.com/file/382909402931
 
-## shapefiles
+*Comments*: Does not include the Phase 2 dredging data.
 
-### bgd_districts.shp
+## bgd_districts.shp
 
-https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
+*Source*: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
 
-### bgd_divisions.shp
+## bgd_divisions.shp
 
-https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
+*Source*: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
 
-Updated to reflect the new divisions, Comilla and Faridpur
+*Comments*: Updated to reflect the new divisions, Comilla and Faridpur.
 
-### bgd_hydrology.shp
+## bgd_hydrology.shp
 
-https://geonode.wfp.org/layers/geonode:bgd_hyd_major_rivers_py
+*Source*: https://geonode.wfp.org/layers/geonode:bgd_hyd_major_rivers_py
 
-### bgd_iwt_routes.shp
+## bgd_iwt_routes.shp
 
-Tess at UT-Austin (?)
+*Source*: Tess at UT-Austin
 
-### bgd_nation.shp
+## bgd_nation.shp
 
-https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
+*Source*: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
 
-### bgd_ports.shp
+## bgd_ports.shp
 
-MacKenzie (?)
+*Source*: MacKenzie
 
-### bgd_upazilas.shp
+## bgd_upazilas.shp
 
-https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
+*Source*: https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015
